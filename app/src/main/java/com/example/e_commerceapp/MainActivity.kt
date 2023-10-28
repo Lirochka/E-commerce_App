@@ -12,15 +12,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
+import com.example.data.network.ProductsService
 import com.example.e_commerceapp.ui.theme.EcommerceAppTheme
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
-import retrofit2.http.GET
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
+    @Inject
+    lateinit var productSService: ProductsService
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -31,12 +32,6 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Greeting("Android")
                 }
-                val retrofit = Retrofit.Builder()
-                    .baseUrl("https://fakestoreapi.com/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
-
-                val productSService = retrofit.create(ProductsService::class.java)
 
                 lifecycleScope.launchWhenCreated {
                     val response = productSService.getAllProducts()
@@ -44,10 +39,6 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-    interface ProductsService{
-        @GET("products")
-        suspend fun getAllProducts(): Response<List<Any>>
     }
 }
 

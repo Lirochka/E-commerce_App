@@ -7,13 +7,11 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
-import com.example.data.network.ProductsService
-import com.example.e_commerceapp.ui.theme.EcommerceAppTheme
+import com.example.e_commerceapp.data.network.ProductsService
+import com.example.e_commerceapp.presentation.screens.mainscreen.ProductCard
+import com.example.e_commerceapp.presentation.screens.mainscreen.MainScreen
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -25,32 +23,19 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            EcommerceAppTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Greeting("Android")
-                }
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                color = MaterialTheme.colors.background
+            ) {
+                ProductCard()
+                MainScreen()
+            }
 
-                lifecycleScope.launchWhenCreated {
-                    val response = productSService.getAllProducts()
-                    Log.d("DATA", response.body()!!.toString())
-                }
+            lifecycleScope.launchWhenCreated {
+                val response = productSService.getAllProducts()
+                Log.d("DATA", response.body()!!.toString())
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    EcommerceAppTheme {
-        Greeting("Android")
-    }
-}

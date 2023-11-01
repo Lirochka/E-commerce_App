@@ -1,7 +1,6 @@
-package com.example.e_commerceapp.ui
+package com.example.e_commerceapp.presentation.screens.mainscreen
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,14 +15,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
-import androidx.compose.material.Colors
-import androidx.compose.material.ExtendedFloatingActionButton
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.Composable
@@ -81,13 +77,13 @@ fun ProductCard() {
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold
                 )
+                Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = "men's clothing",
                     color = MaterialTheme.colors.text,
                     fontSize = 16.sp,
                 )
-                Spacer(modifier = Modifier.height(55.dp))
-
+                Spacer(modifier = Modifier.height(50.dp))
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -110,7 +106,6 @@ fun ProductCard() {
                             Icons.Filled.ShoppingCart,
                             contentDescription = null,
                         )
-
                     }
                 }
             }

@@ -2,7 +2,7 @@ package com.example.e_commerceapp.di
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.example.data.network.ProductsService
+import com.example.e_commerceapp.data.network.ProductsService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -41,7 +41,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun providesProductsService(retrofit: Retrofit): ProductsService{
+    fun providesProductsService(retrofit: Retrofit): ProductsService {
         return retrofit.create(ProductsService::class.java)
     }
 }

@@ -29,86 +29,96 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.e_commerceapp.R
+import com.example.e_commerceapp.domain.model.Product
 import com.example.e_commerceapp.ui.theme.backgroundColor
 import com.example.e_commerceapp.ui.theme.text
 import com.example.e_commerceapp.ui.theme.textName
 
-@Preview
 @Composable
-fun ProductCard() {
-    Card(modifier = Modifier.padding(8.dp)) {
-        Row(
+fun ProductCard(
+    modifier: Modifier = Modifier,
+    product: Product,
+   // onFavoriteClickListener: () -> Unit,
+   // onShoppingCartClickListener: () -> Unit
+) {
+    Card(
+        modifier = modifier
+    ) {
+        Column(
             modifier = Modifier
                 .padding(8.dp)
         ) {
-            Box {
-                Image(
-                    modifier = Modifier
-                        .size(150.dp)
-                        .clip(RoundedCornerShape(15.dp)),
-                    painter = painterResource(id = R.drawable.fake_image),
-                    contentDescription = null
-                )
-
-                FloatingActionButton(
-                    onClick = { /*TODO*/ },
-                    modifier = Modifier
-                        .size(50.dp)
-                        .padding(8.dp)
-                        .align(Alignment.TopEnd),
-                    backgroundColor = MaterialTheme.colors.backgroundColor,
-                    contentColor = Color.White
-                ) {
-                    Icon(
-                        Icons.Filled.Favorite,
-                        contentDescription = null,
-                    )
-                }
-            }
-            Spacer(modifier = Modifier.width(8.dp))
-            Column {
-                Text(
-                    text = "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-                    color = MaterialTheme.colors.textName,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-                Text(
-                    text = "men's clothing",
-                    color = MaterialTheme.colors.text,
-                    fontSize = 16.sp,
-                )
-                Spacer(modifier = Modifier.height(50.dp))
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = "$109.95",
-                        color = MaterialTheme.colors.text,
-                        fontSize = 16.sp,
+            Row {
+                Box {
+                    Image(
+                        modifier = Modifier
+                            .size(150.dp)
+                            .clip(RoundedCornerShape(15.dp)),
+                        painter = painterResource(id = product.image),
+                        contentDescription = null
                     )
 
-                    Button(
-                        colors = ButtonDefaults.buttonColors(
-                            backgroundColor = MaterialTheme.colors.backgroundColor,
-                            contentColor = Color.White
-                        ),
-                        shape = RoundedCornerShape(15.dp),
-                        onClick = { /*TODO*/ }) {
+                    FloatingActionButton(
+                        onClick = { },
+                        modifier = Modifier
+                            .size(50.dp)
+                            .padding(8.dp)
+                            .align(Alignment.TopEnd),
+                        backgroundColor = MaterialTheme.colors.backgroundColor,
+                        contentColor = Color.White
+                    ) {
                         Icon(
-                            Icons.Filled.ShoppingCart,
+                            Icons.Filled.Favorite,
                             contentDescription = null,
                         )
                     }
                 }
+                Spacer(modifier = Modifier.width(8.dp))
+                Column {
+                    Text(
+                        text = product.title,
+                        color = MaterialTheme.colors.textName,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = product.category,
+                        color = MaterialTheme.colors.text,
+                        fontSize = 16.sp,
+                    )
+                    Spacer(modifier = Modifier.height(50.dp))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "$${product.price}",
+                            color = MaterialTheme.colors.text,
+                            fontSize = 16.sp,
+                        )
+
+                        Button(
+                            colors = ButtonDefaults.buttonColors(
+                                backgroundColor = MaterialTheme.colors.backgroundColor,
+                                contentColor = Color.White
+                            ),
+                            shape = RoundedCornerShape(15.dp),
+                            onClick = {  }) {
+                            Icon(
+                                Icons.Filled.ShoppingCart,
+                                contentDescription = null,
+                            )
+                        }
+                    }
+                }
             }
+            Text(
+                text = product.description
+            )
         }
     }
 }

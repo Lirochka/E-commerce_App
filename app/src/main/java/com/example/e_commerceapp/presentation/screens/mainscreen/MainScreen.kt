@@ -1,7 +1,10 @@
 package com.example.e_commerceapp.presentation.screens.mainscreen
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
@@ -17,6 +20,7 @@ import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.e_commerceapp.domain.model.Product
+import com.example.e_commerceapp.presentation.screens.CatalogScreen
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -34,7 +38,7 @@ fun MainScreen() {
                     NavigationItem.ShoppingCart,
                     NavigationItem.Profile
                 )
-                items.forEachIndexed {index, item ->
+                items.forEachIndexed { index, item ->
                     BottomNavigationItem(
                         selected = selectedItemPosition.value == index,
                         onClick = { selectedItemPosition.value = index },
@@ -52,9 +56,6 @@ fun MainScreen() {
         }
     )
     {
-        ProductCard(
-            modifier = Modifier.padding(8.dp),
-            product = Product()
-        )
+        CatalogScreen()
     }
 }
